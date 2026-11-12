@@ -1803,11 +1803,16 @@ footer[id] {
   white-space: nowrap;
   border: 0;
 }
+.hero {
+  display: flex;
+  flex-direction: column;
+}
 .hero-title {
   margin-top: clamp(100px, 14vh, 150px);
 }
 .hero-bottom {
-  margin-top: 65px;
+  margin-top: auto;
+  padding-top: 65px;
 }
 .project-art {
   background: transparent;
@@ -1840,57 +1845,72 @@ footer[id] {
 .project-panel.is-active .panel-foot {
   color: var(--accent);
 }
+/* About: name first, biography on a separate diagonal. */
 .about-section {
-  padding-top: 110px;
-  padding-bottom: 110px;
-  position: relative;
+  padding: 90px max(var(--gutter), calc((100vw - 1536px) / 2 + 110px)) 120px;
+  min-height: 880px;
+  color: var(--white);
+  background: var(--ink);
   overflow: hidden;
 }
+.about-section > h2 {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
 .about-main {
-  grid-template-columns: 0.75fr 1.65fr;
-  gap: 8%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 9%;
+  align-items: start;
+  margin-top: 100px;
+}
+.about-name {
   position: relative;
+  color: var(--accent);
+  font-size: clamp(76px, 9.5vw, 146px);
+  font-weight: 620;
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  padding: 12px 0 22px;
 }
-.about-heading {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.about-name-line {
+  display: block;
+  width: max-content;
 }
-.about-type {
-  font-size: clamp(90px, 11vw, 170px);
-  line-height: 0.82;
-  letter-spacing: -0.07em;
+.about-name-line + .about-name-line {
+  margin-left: 1em;
+}
+.about-name-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.about-name.is-optical .about-name-line {
   color: transparent;
-  -webkit-text-stroke: 1px #10110f30;
-  user-select: none;
-  padding-top: 75px;
 }
 .about-copy {
-  max-width: 850px;
+  max-width: 450px;
+  padding-top: 220px;
 }
-.about-copy p:first-child {
-  font-size: clamp(30px, 3.65vw, 57px);
-  line-height: 1.23;
-  letter-spacing: -0.045em;
-}
-.bio-line {
-  display: inline;
-}
-.about-copy p:first-child em {
-  color: #747d69;
-  transition: color 0.4s;
-}
-.about-copy p:first-child em:hover {
-  color: var(--accent);
+.about-copy p,
+.about-copy p:first-child,
+.about-copy p + p {
+  font-size: clamp(18px, 1.55vw, 24px);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.02em;
+  color: var(--white);
 }
 .about-copy p + p {
-  font-size: 18px;
-  max-width: 500px;
-  margin-top: 35px;
+  margin-top: 28px;
 }
 .about-copy .text-link {
-  margin-top: 40px;
+  margin-top: 54px;
+  font-size: 20px;
+  border-color: currentColor;
 }
 .skills-section {
   padding-bottom: 110px;
@@ -2016,15 +2036,22 @@ footer[id] {
   z-index: 2;
 }
 @media (max-width: 800px) {
+  .about-section {
+    min-height: auto;
+  }
   .about-main {
     grid-template-columns: 1fr;
-    gap: 35px;
+    gap: 64px;
+    margin-top: 70px;
   }
-  .about-type {
-    display: none;
+  .about-name {
+    font-size: clamp(76px, 14vw, 112px);
+    max-width: 650px;
   }
-  .about-copy p:first-child {
-    font-size: 38px;
+  .about-copy {
+    padding-top: 0;
+    justify-self: end;
+    width: min(100%, 440px);
   }
   .skill-workbench {
     grid-template-columns: 1fr;
@@ -2061,12 +2088,22 @@ footer[id] {
     padding-top: 65px;
     padding-bottom: 65px;
   }
-  .about-copy p:first-child {
-    font-size: 32px;
-    line-height: 1.3;
+  .about-main {
+    margin-top: 50px;
+    gap: 48px;
   }
+  .about-name {
+    font-size: clamp(62px, 15vw, 90px);
+  }
+  .about-copy p,
+  .about-copy p:first-child,
   .about-copy p + p {
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .about-copy .text-link {
+    margin-top: 35px;
+    font-size: 18px;
   }
   .skill-workbench {
     margin-top: 30px;
@@ -2125,3 +2162,86 @@ footer[id] {
 }
 .project-art[data-video]>img{object-fit:contain;background:var(--canvas)}
 .case-cover>img{height:auto}
+
+/* The contour fan shares the word's coordinate system and scroll transform. */
+.hero-lockup {
+  position: relative;
+  margin-top: clamp(100px, 14vh, 150px);
+  isolation: isolate;
+}
+.hero-lockup .hero-title {
+  margin: 0;
+}
+.hero-contours {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  overflow: visible;
+  color: var(--accent);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-bottom {
+  grid-template-columns: 1fr auto;
+  margin-top: 44px;
+  padding-top: 0;
+  min-height: 175px;
+  flex: 1;
+}
+.hero-intro {
+  align-self: start;
+}
+.hero-intro .hero-summary {
+  margin-top: 25px;
+  max-width: 330px;
+}
+.hero-work-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 18px;
+  padding: 10px 0;
+  align-self: end;
+  border-bottom: 1px solid var(--accent);
+}
+.hero-work-link span {
+  font-size: 27px;
+  transition: transform 0.35s var(--ease);
+}
+.hero-work-link:is(:hover, :focus-visible) span {
+  transform: translateY(4px);
+}
+@media (max-width: 800px) {
+  .hero-lockup {
+    margin-top: 100px;
+  }
+  .hero-bottom {
+    margin-top: 90px;
+    min-height: 180px;
+  }
+}
+@media (max-width: 600px) {
+  .hero-lockup .hero-title {
+    font-size: 17vw;
+    letter-spacing: -0.075em;
+  }
+  .hero-bottom {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 85px;
+  }
+  .hero-intro .hero-summary {
+    margin-top: 20px;
+  }
+  .hero-work-link {
+    font-size: 16px;
+    justify-self: end;
+    gap: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-work-link span {
+    transition: none;
+    transform: none;
+  }
+}

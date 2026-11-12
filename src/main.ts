@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initGallery } from "./gallery";
 import { initSkills } from "./skills";
+import { initHeroContours } from "./hero-contours";
 
 gsap.registerPlugin(ScrollTrigger);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -11,10 +12,21 @@ let galleryReturnScroll: number | undefined;
 if (document.body.dataset.page === "home") {
   galleryReturnScroll = initGallery(reduceMotion.matches);
   initSkills(reduceMotion.matches);
+  document.fonts.ready.then(() => initHeroContours());
+  if (!reduceMotion.matches && window.matchMedia("(pointer: fine)").matches) {
+    document.fonts.ready.then(async () => {
+      try {
+        const { initAboutOptics } = await import("./about-optics");
+        initAboutOptics(document.querySelector<HTMLElement>(".about-name")!);
+      } catch {
+        /* Native name text remains visible without the enhancement. */
+      }
+    });
+  }
   if (!reduceMotion.matches) {
     document.fonts.ready.then(async () => {
       const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
-      intro.from(".hero-title .title-line", {
+      intro.from(".hero-lockup", {
         yPercent: 35,
         opacity: 0,
         duration: 1.05,
@@ -29,7 +41,7 @@ if (document.body.dataset.page === "home") {
         /* The authored CSS glass remains visible if WebGL is unavailable. */
       }
     });
-    gsap.to(".hero-title", {
+    gsap.to(".hero-lockup", {
       y: -35,
       ease: "none",
       scrollTrigger: {
@@ -45,7 +57,7 @@ if (document.body.dataset.page === "home") {
 if (!reduceMotion.matches) {
   document
     .querySelectorAll(
-      ".bio-line,.skill-workbench,.experience-entry,.academic-entry,.course-entry,.case-content section",
+      ".skill-workbench,.experience-entry,.academic-entry,.course-entry,.case-content section",
     )
     .forEach((element) => {
       gsap.from(element, {
