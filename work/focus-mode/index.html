@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10110f" />
+    <meta
+      name="description"
+      content="Focus Mode by Lakshya Khanna: AI activity classifier."
+    />
+    <title>Focus Mode — Selected Work / Lakshya Khanna</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/mark.svg" />
+  </head>
+  <body data-page="case" class="case-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Lakshya Khanna, home"
+        ><span class="identity-mark">lk<span>↗</span></span></a
+      >
+      <nav class="main-nav" aria-label="Main navigation">
+        <a data-back-work href="/#work">Work</a><a href="/#about">About</a
+        ><a href="/skills/">Skills</a><a href="/#experience">Experience</a
+        ><a href="/education/">Education</a><a href="/#contact">Contact</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary>Menu <span aria-hidden="true">+</span></summary>
+        <nav aria-label="Mobile navigation">
+          <a data-back-work href="/#work">Work</a><a href="/#about">About</a
+          ><a href="/skills/">Skills</a><a href="/#experience">Experience</a
+          ><a href="/education/">Education</a><a href="/#contact">Contact</a>
+        </nav>
+      </details>
+      <a class="resume-link" href="/resume.pdf" target="_blank" rel="noopener"
+        >Résumé <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main id="main">
+      <section class="case-heading">
+        <a class="back-link" data-back-work href="/#work">← Selected work</a>
+        <h1>Focus Mode</h1>
+        <div class="case-lead">
+          <p>AI activity classifier</p>
+          <div>
+            <p>
+              A desktop activity classifier that uses the active window or tab
+              title to distinguish productive and distracting activity.
+            </p>
+          </div>
+        </div>
+        <dl class="case-meta">
+          <div>
+            <dt>Contribution</dt>
+            <dd>Classification pipeline<br />Activity monitoring</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>Python · Scikit-Learn<br />TF-IDF · LinearSVC</dd>
+          </div>
+          <div>
+            <dt>Output</dt>
+            <dd>Activity classification<br />Distraction alerts</dd>
+          </div>
+        </dl>
+      </section>
+      <figure class="case-cover">
+        <img
+          src="/assets/focus.svg"
+          alt="Illustrative window title classification workflow for Focus Mode"
+          width="1440"
+          height="960"
+        />
+        <figcaption>Illustrative workflow</figcaption>
+      </figure>
+      <div class="case-body">
+        <aside class="case-toc">
+          <a href="#context">Overview</a><a href="#workflow">Workflow</a
+          ><a href="#engineering">Engineering</a
+          ><a href="#boundaries">Limitations</a>
+        </aside>
+        <div class="case-content">
+          <section id="context">
+            <h2>Overview</h2>
+            <p class="large-copy">
+              Focus Mode classifies active window and tab titles rather than
+              relying on a countdown timer.
+            </p>
+            <p>
+              The model was trained on more than 25,000 labeled window titles.
+              It uses 1–2 gram TF-IDF features and a LinearSVC classifier to
+              predict productive or distracting activity.
+            </p>
+          </section>
+          <section id="workflow">
+            <h2>Workflow</h2>
+            <ol class="workflow-list">
+              <li>
+                <span class="step-number">01</span>
+                <div>
+                  <h3>Read the title</h3>
+                  <p>Read the active window or tab title every ten seconds.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">02</span>
+                <div>
+                  <h3>Classify activity</h3>
+                  <p>
+                    Transform the title into TF-IDF features and predict its
+                    activity class with LinearSVC.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">03</span>
+                <div>
+                  <h3>Detect sustained distraction</h3>
+                  <p>
+                    Raise an alert after five minutes of sustained distracting
+                    activity.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </section>
+          <section id="engineering">
+            <h2>Engineering</h2>
+            <div class="decision">
+              <h3>Text features and classification</h3>
+              <p>
+                The training pipeline uses 1–2 gram TF-IDF features with
+                LinearSVC in Scikit-Learn. The dataset contains more than 25,000
+                labeled window titles.
+              </p>
+            </div>
+            <div class="decision">
+              <h3>Local inference</h3>
+              <p>
+                Pickled model artifacts support low-latency inference in the
+                Python activity-monitoring loop.
+              </p>
+            </div>
+          </section>
+          <section id="boundaries">
+            <h2>Limitations</h2>
+            <p>
+              Window titles provide limited context: the same application can be
+              useful or distracting depending on the task. No held-out accuracy
+              score, confusion matrix or measured inference benchmark was
+              supplied for this portfolio.
+            </p>
+          </section>
+        </div>
+      </div>
+      <section class="case-return">
+        <a data-back-work href="/#work"
+          >Back to selected work <span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer class="subpage-footer">
+      <a href="/">© 2026 Lakshya Khanna</a
+      ><a href="mailto:Lakshya1khanna@gmail.com">Get in touch ↗</a>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

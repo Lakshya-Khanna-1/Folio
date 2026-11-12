@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10110f" />
+    <meta
+      name="description"
+      content="SpecForge by Lakshya Khanna: turning raw ideas into agent-ready specifications with a streamed AI workflow."
+    />
+    <title>SpecForge — Selected Work / Lakshya Khanna</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/mark.svg" />
+  </head>
+  <body data-page="case" class="case-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Lakshya Khanna, home"
+        ><span class="identity-mark">lk<span>↗</span></span></a
+      >
+      <nav class="main-nav" aria-label="Main navigation">
+        <a data-back-work href="/#work">Work</a><a href="/#about">About</a
+        ><a href="/skills/">Skills</a><a href="/#experience">Experience</a
+        ><a href="/education/">Education</a><a href="/#contact">Contact</a>
+      </nav>
+      <details class="mobile-nav">
+        <summary>Menu <span aria-hidden="true">+</span></summary>
+        <nav aria-label="Mobile navigation">
+          <a data-back-work href="/#work">Work</a><a href="/#about">About</a
+          ><a href="/skills/">Skills</a><a href="/#experience">Experience</a
+          ><a href="/education/">Education</a><a href="/#contact">Contact</a>
+        </nav>
+      </details>
+      <a class="resume-link" href="/resume.pdf" target="_blank" rel="noopener"
+        >Résumé <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main id="main">
+      <section class="case-heading">
+        <a class="back-link" data-back-work href="/#work">← Selected work</a>
+        <h1>SpecForge</h1>
+        <div class="case-lead">
+          <p>AI PRD &<br />Spec Generator</p>
+          <div>
+            <p>
+              An AI-assisted workflow that turns a product idea into the
+              documents a coding agent needs to get started.
+            </p>
+            <a
+              class="text-link"
+              href="https://github.com/Lakshya-Khanna-1/PRD-generator"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View source <span>↗</span></a
+            >
+          </div>
+        </div>
+        <dl class="case-meta">
+          <div>
+            <dt>Contribution</dt>
+            <dd>Full-stack development<br />LLM workflow & integration</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>Next.js · TypeScript<br />OpenRouter · Zod · SSE</dd>
+          </div>
+          <div>
+            <dt>Output</dt>
+            <dd>spec.md · tasks.md<br />agents.md</dd>
+          </div>
+        </dl>
+      </section>
+      <figure class="case-cover">
+        <img
+          src="/assets/specforge.svg"
+          alt="Illustrative SpecForge workflow with idea input and three structured documents"
+          width="1440"
+          height="960"
+        />
+        <figcaption>Illustrative workflow</figcaption>
+      </figure>
+      <div class="case-body">
+        <aside class="case-toc">
+          <a href="#context">Overview</a><a href="#workflow">Workflow</a
+          ><a href="#engineering">Engineering</a
+          ><a href="#boundaries">Limitations</a>
+        </aside>
+        <div class="case-content">
+          <section id="context">
+            <h2>Overview</h2>
+            <p class="large-copy">
+              SpecForge starts with an unstructured product idea and ends with a
+              set of agent-ready documents.
+            </p>
+            <p>
+              The application guides the idea through clarification, a brief and
+              document generation. The result is a specification, task list and
+              agent instructions that can be reviewed, copied or downloaded
+              together.
+            </p>
+            <p>
+              My work covered the full-stack application, the LLM integration
+              and the streamed review experience.
+            </p>
+          </section>
+          <section id="workflow">
+            <h2>Workflow</h2>
+            <ol class="workflow-list">
+              <li>
+                <span class="step-number">01</span>
+                <div>
+                  <h3>Clarify</h3>
+                  <p>
+                    Start from the raw product idea and clarify what needs to be
+                    specified.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">02</span>
+                <div>
+                  <h3>Brief</h3>
+                  <p>
+                    Turn the clarified input into a structured brief for the
+                    generation pipeline.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">03</span>
+                <div>
+                  <h3>Generate</h3>
+                  <p>
+                    Create spec.md, tasks.md and agents.md, with output streamed
+                    live using Server-Sent Events.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">04</span>
+                <div>
+                  <h3>Review & export</h3>
+                  <p>
+                    Review the documents in tabs, copy them, regenerate an
+                    individual document, or download a zip with JSZip.
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <div
+              class="architecture-study"
+              role="img"
+              aria-label="Browser sends idea to server API, which validates output from OpenRouter and streams specification documents back to browser"
+            >
+              <div class="architecture-node">
+                <small>Browser</small><strong>Idea & review</strong>
+              </div>
+              <span aria-hidden="true">↔</span>
+              <div class="architecture-node accent-node">
+                <small>Server</small><strong>Validate & stream</strong>
+              </div>
+              <span aria-hidden="true">↔</span>
+              <div class="architecture-node">
+                <small>OpenRouter</small><strong>LLM generation</strong>
+              </div>
+            </div>
+          </section>
+          <section id="engineering">
+            <h2>Engineering</h2>
+            <div class="decision">
+              <h3>A server-side LLM boundary</h3>
+              <p>
+                OpenRouter calls sit behind a server-side wrapper. The browser
+                never receives the API key. Automatic fallback-model retry gives
+                the pipeline another model path when a call fails.
+              </p>
+            </div>
+            <div class="decision">
+              <h3>Structured output, checked</h3>
+              <p>
+                Zod validates the model’s JSON output. Per-IP rate limiting adds
+                a boundary around request volume. These are explicit application
+                controls around the generation workflow.
+              </p>
+            </div>
+            <div class="decision">
+              <h3>Progress that stays visible</h3>
+              <p>
+                Server-Sent Events stream the generation to the interface. The
+                tabbed viewer supports reviewing and regenerating individual
+                documents instead of repeating the entire flow.
+              </p>
+            </div>
+            <div class="decision">
+              <h3>Documents that leave the app</h3>
+              <p>
+                Copy actions and a one-click zip download make the generated
+                documents usable in the next step of development. Sentry is
+                integrated for error tracking.
+              </p>
+            </div>
+          </section>
+          <section id="boundaries">
+            <h2>Limitations</h2>
+            <p>
+              The workflow supports clarification, streamed generation,
+              document-level revision and export. It gives the idea a consistent
+              structure and a practical handoff into development.
+            </p>
+            <p>
+              Valid JSON is a structural check, rather than a measure of a
+              specification’s completeness. The review step remains important:
+              requirements and tasks need to fit the intended product before
+              they guide implementation.
+            </p>
+            <a
+              class="text-link"
+              href="https://github.com/Lakshya-Khanna-1/PRD-generator"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Explore the source <span>↗</span></a
+            >
+          </section>
+        </div>
+      </div>
+      <section class="case-return">
+        <a data-back-work href="/#work"
+          >Back to selected work <span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer class="subpage-footer">
+      <a href="/">© 2026 Lakshya Khanna</a
+      ><a href="mailto:Lakshya1khanna@gmail.com">Get in touch ↗</a>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

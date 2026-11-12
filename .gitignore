@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.vercel/
+.openai/
+reference/
+references/
+output/
+*.md
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
