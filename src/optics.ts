@@ -131,16 +131,16 @@ export function initOptics(hero: HTMLElement) {
     camera.updateProjectionMatrix();
     const mobile = width < 600;
     slab.scale.set(
-      width * (mobile ? 0.26 : 0.185),
-      height * (mobile ? 0.44 : 0.72),
+      width * (mobile ? 0.55 : 0.43),
+      height * (mobile ? 0.17 : 0.29),
       1,
     );
     slab.position.set(
-      width * (mobile ? 0.7 : 0.685),
-      height * (mobile ? 0.58 : 0.53),
+      width * (mobile ? 0.83 : 0.82),
+      height * (mobile ? 0.7 : 0.66),
       0,
     );
-    slab.rotation.z = -0.15;
+    slab.rotation.z = 0.11;
     dirty = true;
   }
 
@@ -151,7 +151,7 @@ export function initOptics(hero: HTMLElement) {
     uniforms.uPointer.value.lerp(pointer, 0.045);
     uniforms.uTime.value = (performance.now() - started) / 1000;
     slab.rotation.y = uniforms.uPointer.value.x * 0.13;
-    slab.rotation.z = -0.15 + uniforms.uPointer.value.y * 0.025;
+    slab.rotation.z = 0.11 + uniforms.uPointer.value.y * 0.025;
     renderer.render(scene, camera);
     frame = requestAnimationFrame(render);
   }

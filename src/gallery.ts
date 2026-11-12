@@ -3,14 +3,14 @@ import { selectIndex, swipeDirection } from "./gallery-model";
 
 const projects = [
   {
-    category: "Virtual physics lab",
-    description:
-      "A virtual physics lab built by a four-person team, with five interactive experiments.",
-  },
-  {
     category: "AI PRD & Spec Generator",
     description:
       "Turns a product idea into specifications, tasks and agent instructions.",
+  },
+  {
+    category: "Virtual physics lab",
+    description:
+      "A virtual physics lab built by a four-person team, with five interactive experiments.",
   },
   {
     category: "AI activity classifier",
@@ -84,7 +84,14 @@ export function initGallery(reduced: boolean) {
     start = { x: event.clientX, y: event.clientY };
     ignoreClick = false;
   });
+  stage.addEventListener("pointermove", (event) => {
+    if (!start || reduced) return;
+    const dx = event.clientX - start.x;
+    if (Math.abs(dx) > Math.abs(event.clientY - start.y) * 1.25)
+      gsap.set(stage, { x: Math.max(-70, Math.min(70, dx * 0.22)) });
+  });
   stage.addEventListener("pointerup", (event) => {
+    gsap.to(stage, { x: 0, duration: reduced ? 0 : 0.65, ease: "power3.out" });
     if (!start) return;
     const direction = swipeDirection(
       event.clientX - start.x,
@@ -100,12 +107,14 @@ export function initGallery(reduced: boolean) {
     }
   });
   stage.addEventListener("pointercancel", () => {
+    gsap.to(stage, { x: 0, duration: reduced ? 0 : 0.65 });
     start = null;
   });
   window.addEventListener("resize", () => display(active, true));
 
   panels.forEach((panel, index) => {
     const link = panel.querySelector<HTMLAnchorElement>(".project-art")!;
+    link.addEventListener("focus", () => display(index));
     link.addEventListener("click", (event) => {
       if (ignoreClick || transitioning) {
         event.preventDefault();
@@ -176,5 +185,21 @@ export function initGallery(reduced: boolean) {
     /* Invalid or inaccessible session data must not prevent rendering. */
   }
   display(active, true);
+  if (!reduced) {
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        try {
+          const { initGalleryMedia } = await import("./gallery-media");
+          initGalleryMedia(stage, panels);
+        } catch {
+          /* Native image links remain usable. */
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(stage);
+  }
   return restoredScroll;
 }

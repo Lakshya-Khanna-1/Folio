@@ -42,10 +42,6 @@
             >KHANNA<span class="name-stop">.</span></span
           >
         </h1>
-        <div class="optical-fallback" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </div>
-        <canvas class="optical-canvas" aria-hidden="true"></canvas>
         <div class="hero-bottom">
           <div class="hero-role">
             <p>AI / ML<br /><em>Engineer.</em></p>
@@ -73,30 +69,31 @@
             <article class="project-panel" data-project="0">
               <a
                 class="project-art"
-                href="/work/vphy-lab/"
-                aria-label="Open Vphy Lab case study"
-                draggable="false"
-                ><img
-                  src="/assets/vphy.svg"
-                  alt="Illustrative Vphy Lab experiment graph"
-                  width="1440"
-                  height="960"
-                  draggable="false" /></a
-              ><span class="panel-foot">Vphy Lab</span>
-            </article>
-            <article class="project-panel is-active" data-project="1">
-              <a
-                class="project-art"
                 href="/work/specforge/"
                 aria-label="Open SpecForge case study"
                 draggable="false"
                 ><img
-                  src="/assets/specforge.svg"
+                  src="/assets/specforge-cover.webp"
                   alt="Illustrative SpecForge specification workflow"
                   width="1440"
                   height="960"
                   draggable="false" /></a
               ><span class="panel-foot">SpecForge</span>
+            </article>
+            <article class="project-panel is-active" data-project="1">
+              <a
+                class="project-art"
+                data-video="/assets/vphy-loop.mp4"
+                href="/work/vphy-lab/"
+                aria-label="Open Vphy Lab case study"
+                draggable="false"
+                ><img
+                  src="/assets/vphy-poster.webp"
+                  alt="Illustrative Vphy Lab experiment graph"
+                  width="1440"
+                  height="960"
+                  draggable="false" /></a
+              ><span class="panel-foot">Vphy Lab</span>
             </article>
             <article class="project-panel" data-project="2">
               <a
@@ -105,7 +102,7 @@
                 aria-label="Open Focus Mode case study"
                 draggable="false"
                 ><img
-                  src="/assets/focus.svg"
+                  src="/assets/focus-cover.webp"
                   alt="Illustrative Focus Mode activity classification"
                   width="1440"
                   height="960"
@@ -119,10 +116,10 @@
               aria-live="polite"
               aria-atomic="true"
             >
-              <span id="project-category">AI PRD & Spec Generator</span>
+              <span id="project-category">Virtual physics lab</span>
               <p id="project-description">
-                Turns a product idea into specifications, tasks and agent
-                instructions.
+                A virtual physics lab built by a four-person team, with five
+                interactive experiments.
               </p>
             </div>
             <div class="gallery-controls">
@@ -141,12 +138,21 @@
         aria-labelledby="about-heading"
       >
         <div class="about-main">
-          <h2 id="about-heading">About</h2>
+          <div class="about-heading">
+            <h2 id="about-heading">About</h2>
+            <span class="about-type" aria-hidden="true">AI<br />/ ML</span>
+          </div>
           <div class="about-copy">
             <p>
-              I’m Lakshya, an Information Technology student based in Delhi,
-              working across machine learning, generative AI and full-stack
-              development.
+              <span class="bio-line"
+                >I’m Lakshya, an Information Technology student based in
+                Delhi.</span
+              >
+              <span class="bio-line"
+                >I work across <em>machine learning</em>,
+                <em>generative AI</em> and
+                <em>full-stack development</em>.</span
+              >
             </p>
             <p>
               My work connects model pipelines, language models and agent
@@ -171,18 +177,54 @@
           <h2 id="skills-heading">Skills</h2>
           <a class="text-link" href="/skills/">All skills <span>↗</span></a>
         </div>
-        <div class="skill-summary">
-          <div>
-            <h3>Machine learning</h3>
-            <p>Python, Scikit-Learn,<br />NumPy, Pandas</p>
+        <div class="skill-workbench">
+          <div
+            class="skill-categories"
+            role="group"
+            aria-label="Skill categories"
+          >
+            <button data-skill="ml" aria-pressed="true">
+              Machine learning<span aria-hidden="true">↗</span></button
+            ><button data-skill="ai" aria-pressed="false">
+              Generative AI<span aria-hidden="true">↗</span></button
+            ><button data-skill="web" aria-pressed="false">
+              Backend & web<span aria-hidden="true">↗</span>
+            </button>
           </div>
-          <div>
-            <h3>Generative AI</h3>
-            <p>RAG, n8n, Ollama,<br />Gemini API, OpenRouter</p>
-          </div>
-          <div>
-            <h3>Backend & web</h3>
-            <p>FastAPI, Next.js,<br />REST APIs, PostgreSQL</p>
+          <div class="skill-stage" aria-labelledby="skill-current">
+            <h3 id="skill-current" class="sr-only">Machine learning tools</h3>
+            <svg
+              class="skill-map"
+              viewBox="0 0 620 360"
+              role="img"
+              aria-label="Python, Scikit-Learn, NumPy and FastAPI tool composition"
+            >
+              <g class="skill-connections">
+                <path d="M90 175 Q150 175 270 90" />
+                <path d="M90 175 Q150 175 270 260" />
+                <path d="M270 90 Q430 90 510 175" />
+                <path d="M270 260 Q430 260 510 175" />
+              </g>
+              <g class="skill-node" transform="translate(90 175)">
+                <circle r="5" />
+                <text y="36" text-anchor="middle">Python</text>
+              </g>
+              <g class="skill-node" transform="translate(270 90)">
+                <circle r="5" />
+                <text y="36" text-anchor="middle">Scikit-Learn</text>
+              </g>
+              <g class="skill-node" transform="translate(270 260)">
+                <circle r="5" />
+                <text y="36" text-anchor="middle">NumPy</text>
+              </g>
+              <g class="skill-node" transform="translate(510 175)">
+                <circle r="5" />
+                <text y="36" text-anchor="middle">FastAPI</text>
+              </g>
+            </svg>
+            <p id="skill-tools" aria-live="polite">
+              Python · Scikit-Learn · NumPy · Pandas · TF-IDF · LinearSVC
+            </p>
           </div>
         </div>
       </section>
@@ -258,8 +300,13 @@
         </div>
       </section>
       <footer class="contact-section" id="contact">
+        <canvas class="optical-canvas" aria-hidden="true"></canvas>
+        <div class="optical-fallback" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
         <a class="contact-title" href="mailto:Lakshya1khanna@gmail.com"
-          >Get in touch<span>↗</span></a
+          ><span data-optical-text>Get in touch</span
+          ><span class="contact-arrow">↗</span></a
         >
         <div class="footer-links">
           <a href="mailto:Lakshya1khanna@gmail.com">Lakshya1khanna@gmail.com</a>

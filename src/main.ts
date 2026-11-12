@@ -2,6 +2,7 @@ import "./styles.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initGallery } from "./gallery";
+import { initSkills } from "./skills";
 
 gsap.registerPlugin(ScrollTrigger);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -9,6 +10,7 @@ let galleryReturnScroll: number | undefined;
 
 if (document.body.dataset.page === "home") {
   galleryReturnScroll = initGallery(reduceMotion.matches);
+  initSkills(reduceMotion.matches);
   if (!reduceMotion.matches) {
     document.fonts.ready.then(async () => {
       const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -22,7 +24,7 @@ if (document.body.dataset.page === "home") {
       await intro;
       try {
         const { initOptics } = await import("./optics");
-        initOptics(document.querySelector<HTMLElement>(".hero")!);
+        initOptics(document.querySelector<HTMLElement>(".contact-section")!);
       } catch {
         /* The authored CSS glass remains visible if WebGL is unavailable. */
       }
@@ -43,7 +45,7 @@ if (document.body.dataset.page === "home") {
 if (!reduceMotion.matches) {
   document
     .querySelectorAll(
-      ".about-main,.skill-summary,.experience-entry,.academic-entry,.course-entry,.case-content section",
+      ".bio-line,.skill-workbench,.experience-entry,.academic-entry,.course-entry,.case-content section",
     )
     .forEach((element) => {
       gsap.from(element, {
