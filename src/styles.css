@@ -1912,6 +1912,73 @@ footer[id] {
   font-size: 20px;
   border-color: currentColor;
 }
+.about-copy { position: relative; }
+.about-identity { min-width: 0; }
+.about-laptop {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 700 / 365;
+  margin-top: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  mix-blend-mode: lighten;
+  pointer-events: none;
+}
+.about-laptop img {
+  position: absolute;
+  max-width: none;
+  width: 226.57143%;
+  height: auto;
+  left: -14.28571%;
+  top: -167.12329%;
+}
+.about-laptop canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.about-laptop.is-ready img { visibility: hidden; }
+.delhi-scene {
+  position: absolute;
+  left: -8%;
+  bottom: calc(100% - 190px);
+  width: 116%;
+  color: #e5dac0;
+  pointer-events: none;
+}
+.delhi-scene svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.delhi-scene .delhi-sun { animation: delhi-sunset 24s ease-in-out infinite alternate; }
+.delhi-scene .delhi-branch {
+  transform-origin: 0 0;
+  animation: delhi-wind 5.8s ease-in-out infinite alternate;
+}
+.delhi-scene .delhi-leaf {
+  transform-origin: 0 0;
+  animation: delhi-leaves 2.7s ease-in-out infinite alternate;
+}
+.delhi-ride { transform: translateX(-90px); animation: delhi-outbound 16s linear infinite; }
+.delhi-ride-back { transform: translateX(730px); animation-name: delhi-inbound; }
+.delhi-spokes { animation: delhi-wheel .475s linear infinite; }
+.delhi-suspension { animation: delhi-road .32s ease-in-out infinite alternate; }
+.delhi-scene *, .delhi-scene:not(.is-running) * { animation-play-state: paused; }
+.delhi-scene.is-running * { animation-play-state: running; }
+@keyframes delhi-sunset { to { transform: translate(-22px, 15px); } }
+@keyframes delhi-wind { from { transform: rotate(-1deg); } to { transform: rotate(2deg); } }
+@keyframes delhi-leaves { from { transform: rotate(-3deg); } to { transform: rotate(5deg); } }
+@keyframes delhi-outbound {
+  0%, 7% { transform: translateX(-90px); }
+  44%, 100% { transform: translateX(730px); }
+}
+@keyframes delhi-inbound {
+  0%, 55% { transform: translateX(730px); }
+  92%, 100% { transform: translateX(-90px); }
+}
+@keyframes delhi-wheel { to { transform: rotate(360deg); } }
+@keyframes delhi-road { to { transform: translateY(.5px); } }
+@media (prefers-reduced-motion: reduce) {
+  .delhi-scene * { animation: none !important; }
+  .delhi-ride-forward { transform: translateX(170px); }
+  .delhi-ride-back { display: none; }
+}
+@media (max-width: 800px) {
+  .delhi-scene { position: relative; inset: auto; width: 100%; margin: -20px 0 32px; }
+}
 .skills-section {
   padding-bottom: 110px;
 }

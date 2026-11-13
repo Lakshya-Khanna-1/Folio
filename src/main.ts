@@ -4,12 +4,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initGallery } from "./gallery";
 import { initSkills } from "./skills";
 import { initHeroContours } from "./hero-contours";
+import { initDelhiScene } from "./delhi-scene";
+import { initLaptopParticles } from "./laptop-particles";
 
 gsap.registerPlugin(ScrollTrigger);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let galleryReturnScroll: number | undefined;
 
 if (document.body.dataset.page === "home") {
+  initDelhiScene();
+  initLaptopParticles();
   galleryReturnScroll = initGallery(reduceMotion.matches);
   initSkills(reduceMotion.matches);
   document.fonts.ready.then(() => initHeroContours());
